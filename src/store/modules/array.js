@@ -1,7 +1,6 @@
 import mergeSort from '../../sorting_algorithms/mergesort'
-import insertionSort from '../../sorting_algorithms/insertion_sort'
-import bubbleSort from '../../sorting_algorithms/bubble_sort'
-// import $ from 'jquery'
+import store from '../../store'
+
 export default {
     namespaced: true,
     state: {
@@ -9,13 +8,9 @@ export default {
         width: 45,
         sliderValue:1,
         mergeOrder:[[1,2]],
-        insertionOrder:[[1,2]],
-        bubbleOrder:[[1,2]],
-        sorted: false,
-        checkGreen: false,
-        checkRed: false,
-        colorChanged:[],
-        showValue: true
+        showValue: true,
+        sorted:false
+
     },
 
     getters: {
@@ -38,141 +33,19 @@ export default {
                 newArr
             })
         },
-        bubble_sort({commit, state}){
-            const newArr = [...state.array]
-            const bubbleOrder = state.bubbleOrder
-            bubbleSort(newArr, bubbleOrder)
-
-            let i = 0
-            for(i; i < bubbleOrder.length; i++){
-
-                const indxBarOne = bubbleOrder[i][0]
-                const indxBarTwo = bubbleOrder[i][1]
-                if(!bubbleOrder[i][2]){
-                    const heightBarOne = bubbleOrder[i][3]
-                    const heightBarTwo = bubbleOrder[i][4]
-                    commit('changeValue',{
-                        indxBarOne,
-                        indxBarTwo,
-                        heightBarOne,
-                        heightBarTwo
-                })
-                }
-
-            }
-        },
-        insertion_and_bubble_sort({commit,state}, algo){          
-            const newArr = [...state.array]
-            let sortOrder = []
-            if(algo === "insertion"){
-                const insertionOrder = state.insertionOrder
-                insertionSort(newArr, insertionOrder)
-                sortOrder = insertionOrder
-            }
-            else{
-                const bubbleOrder = state.bubbleOrder
-                bubbleSort(newArr, bubbleOrder)
-                sortOrder = bubbleOrder
-            }
-            // const bars = $('.bars')
-            let i = 1
-            let j = 1
-            let completedCount = 1
-            for(i; i < sortOrder.length; i++){
-                // const barOne = bars[sortOrder[i][0]]
-                // const barTwo = bars[sortOrder[i][1]]
-                let heightBarOne = -1
-                let heightBarTwo = -1
-                const indxBarOne = sortOrder[i][0]
-                const indxBarTwo = sortOrder[i][1]
-                if(!sortOrder[i][2]){
-                    heightBarOne = sortOrder[i][3]
-                    heightBarTwo = sortOrder[i][4]
-                }
-                setTimeout(()=>{
-                    // $(barOne).css("background-color","#ffb3ba")
-                    // $(barTwo).css("background-color","#ffb3ba")
-                    commit('changeBarColor', {
-                            value:"comparing",
-                            barIndx:[indxBarOne, indxBarTwo]
-                    })
-                },100*j)
-
-                j++
-                setTimeout(()=>{
-                    if(heightBarTwo != -1){
-                        commit('changeValue',{
-                            indxBarOne,
-                            indxBarTwo,
-                            heightBarOne,
-                            heightBarTwo
-                    })}
-                    // $(barOne).css("background-color","#baffc9")
-                    // $(barTwo).css("background-color","#baffc9")
-                    commit('changeBarColor', {
-                        value:"compSorted",
-                        barIndx:[indxBarOne, indxBarTwo]
-                        })
-                  },
-                100*j)
-
-                j++
-                setTimeout(()=>{
-                    completedCount++
-                    // $(barOne).css("background-color","gray")
-                    // $(barTwo).css("background-color","gray")
-                    commit('changeBarColor', {
-                        value:"sorting",
-                        barInx:[]
-                    })
-                    console.log(completedCount, sortOrder.length)
-                    if(completedCount===sortOrder.length){
-                        commit('changeBarColor', {
-                            value:"arraySorted",
-                            barInx:[]
-                    })
-                    }
-                  },
-                100*j)
-    
-                j++
-
-            }
-        }
 
     },
 
     mutations: {
-
-        changeBarColor(state, { value, barIndx }){
-            if(value==="comparing"){
-                state.checkRed = !state.checkRed 
-                state.colorChanged = barIndx
-            }
-            else if(value=="compSorted"){
-                state.checkRed = false
-                state.checkGreen = !state.checkGreen
-                state.colorChanged = barIndx
-            }
-            else if(value==="arraySorted"){
-                state.sorted = !state.sorted
-                state.colorChanged = barIndx
-            }
-            else{
-                state.checkGreen = false
-                state.checkRed = false
-                state.colorChanged = barIndx
-            }
-
+        arraySorted(state){
+            state.sorted = true
         },
-        changeValue(state, payload){
-            let newArr = [...state.array]
+        changeValueAfterSortStep(state, payload){
+            let newArr = [...store.state.array.array]
             newArr[payload.indxBarOne] = payload.heightBarOne
             newArr[payload.indxBarTwo] = payload.heightBarTwo
             state.array = newArr
-        
         },
-
 
         changeArray (state, {sliderValue}){
             const value = parseInt(sliderValue)
@@ -192,8 +65,7 @@ export default {
             state.width <= 30 ? state.showValue = false: state.showValue = true 
         
             state.mergeOrder =[[1,2]]
-            state.insertionOrder =[[1,2]]
-            state.bubbleOrder =[[1,2]]
+            store.commit('insertBubble/changeSortArray')
             state.sorted = false
         },
 
@@ -203,17 +75,8 @@ export default {
 
         merge_arr(state, payload){
             state.mergeOrder = payload.mergeOrder
-            // state.array = payload.newArr
-            // state.array = arr
-        },
 
-        insertion_arr(state, payload){
-            console.log(payload.insertionOrder)
-            state.insertionOrder = payload.insertionOrder
-
-        }
-        
-
+        },    
     }
 
 }

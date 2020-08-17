@@ -1,6 +1,7 @@
 <template>
     <div class="taskbar">
-          <b-button size="sm" v-b-toggle.sidebar-variant>Configurations</b-button>
+          <font-awesome-icon size="lg" class="show-bars" v-b-toggle.sidebar-variant icon='bars' />
+          <b-button class="show-button" size="sm" v-b-toggle.sidebar-variant>Configurations</b-button>
           <b-sidebar text-variant="light" z-index=2 width="190px" id="sidebar-variant" bg-variant="dark" shadow>
             <div class="px-3 py-2">
               <nav class="nav flex-column">
@@ -13,16 +14,24 @@
                   <li><a class="nav-link" v-b-toggle.sidebar-variant @click="merge_sort" href="#">Merge Sort</a></li>
                   <li><a class="nav-link" href="#">Heap Sort</a></li>
                   <li><a class="nav-link" v-b-toggle.sidebar-variant @click="bubble_sort" href="#">Bubble Sort</a></li>
-                  <li><a class="nav-link" @click="insertion_sort" href="#">Insertion Sort</a></li>
+                  <li><a class="nav-link" v-b-toggle.sidebar-variant @click="insertion_sort" href="#">Insertion Sort</a></li>
+                  <li><a class="nav-link" v-b-toggle.sidebar-variant @click="quick_sort" href="#">Quick Sort</a></li>
                </ul>
                  <p class="nav-label">Change Size</p>
                 <ul>
-                  <li><input type="range" 
+                  <li class="desktop-input"><input type="range" 
                             min="1" 
                             max="120" 
                             value="1" 
                             class="slider" 
                             id="myRange"
+                            v-model="sliderValue"
+                            @input="changeArray({sliderValue})"></li>
+                  <li class="mobile-input"><input type="range" 
+                            min="1" 
+                            max="35" 
+                            value="1" 
+                            class="slider" 
                             v-model="sliderValue"
                             @input="changeArray({sliderValue})"></li>
                 </ul>
@@ -42,12 +51,17 @@ export default {
         ...mapState('array',['array','mergeOrder'])
     },
     methods: {
+        quick_sort(){
+          this.$store.dispatch('quick/quick_sort')
+
+        },
         bubble_sort(){
-          this.$store.dispatch('array/insertion_and_bubble_sort',"bubble")
+          this.$store.dispatch('insertBubble/insertion_and_bubble_sort',"bubble")
 
         },
         insertion_sort(){
-          this.$store.dispatch('array/insertion_and_bubble_sort',"insertion")
+          console.log(this.$store)
+          this.$store.dispatch('insertBubble/insertion_and_bubble_sort',"insertion")
         },
         merge_sort(){
           this.$store.dispatch('array/merge_sort')
@@ -68,7 +82,7 @@ export default {
               $(compBartwo).css("background-color","red")
               $(heightBar).css("height",`${heightToChange}px` ) 
               },
-              10*j)
+              1000*j)
             
             j++
             setTimeout(()=>{
@@ -76,7 +90,7 @@ export default {
               $(compBarOne).css("background-color","gray")
               $(compBartwo).css("background-color","gray")
               },
-            10*j)
+            1000*j)
 
             j++
 
@@ -84,11 +98,11 @@ export default {
           }
 
         },
-        ...mapMutations('array',['changeArray','changeValue'])
+        ...mapMutations('array',['changeArray','changeValue']),
+        ...mapMutations('insertBubble',['changeValue'])
     },
     created(){
       this.changeArray(this.sliderValue)
-      // this.$store.dispatch('array/merge_sort')
     },
     data(){
       return{
@@ -114,5 +128,34 @@ export default {
 
   strong{
     color: white!important;
+  }
+  .mobile-input{
+    display: none !important;
+  }
+
+  .show-bars{
+    display: none
+    }
+
+  @media only screen and (max-width: 600px) {
+
+      .mobile-input{
+        display: inline !important;
+      }
+
+      .desktop-input{
+        display: none !important;
+      }
+
+      .show-bars{
+        margin-left: 5px;
+        display:inline-block;
+        height: 10px;
+      }
+
+      .show-button{
+        display: none;
+      }
+
   }
 </style>

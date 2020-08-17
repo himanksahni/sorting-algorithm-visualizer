@@ -32,11 +32,6 @@ export default {
         this.$store.dispatch('array/addFirstElement')
         this.merge_sort
     },
-    data(){
-        return{
-            // arr: this.$store.state.array.array
-        }
-    }
 
 }
 </script>
