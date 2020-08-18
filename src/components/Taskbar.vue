@@ -29,7 +29,7 @@
                             @input="changeArray({sliderValue})"></li>
                   <li class="mobile-input"><input type="range" 
                             min="1" 
-                            max="80" 
+                            max="65" 
                             value="1" 
                             class="slider" 
                             v-model="sliderValue"
