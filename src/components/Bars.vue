@@ -6,6 +6,8 @@
                   quickIPosition === elId? 'color-dark-green':
                   quickGreen && quickGreenChanged.includes(elId)? 'color-green':
                   quickRed && quickRedChanged.includes(elId)? 'color-red':
+                  heapRed && heapRedChanged.includes(elId)? 'color-red':
+                  heapGreen && heapGreenChanged.includes(elId)? 'color-green':
                   seperator.includes(elId)?'completed':
                   'color-gray' ]"
         class="bars" :style="heightCss" >
@@ -29,6 +31,8 @@ export default {
         ...mapState('quick',['quickGreen','quickVoilet','quickGreenChanged', 
                             'quickVoiletChanged', 'quickIPosition', 'quickRed',
                             'quickRedChanged','seperator']),
+
+        ...mapState('heap',['heapRed', 'heapRedChanged', 'heapGreen', 'heapGreenChanged']),
         heightCss(){
             let h = (this.value*3) + 10
             h = `${h}px`

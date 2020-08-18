@@ -12,7 +12,7 @@
                 <p id="sel" class="nav-label"> Select Algorithm</p>
                 <ul>
                   <li><a class="nav-link" v-b-toggle.sidebar-variant @click="merge_sort" href="#">Merge Sort</a></li>
-                  <li><a class="nav-link" href="#">Heap Sort</a></li>
+                  <li><a class="nav-link" v-b-toggle.sidebar-variant @click="heap_sort" href="#">Heap Sort</a></li>
                   <li><a class="nav-link" v-b-toggle.sidebar-variant @click="bubble_sort" href="#">Bubble Sort</a></li>
                   <li><a class="nav-link" v-b-toggle.sidebar-variant @click="insertion_sort" href="#">Insertion Sort</a></li>
                   <li><a class="nav-link" v-b-toggle.sidebar-variant @click="quick_sort" href="#">Quick Sort</a></li>
@@ -51,6 +51,9 @@ export default {
         ...mapState('array',['array','mergeOrder'])
     },
     methods: {
+        heap_sort(){
+          this.$store.dispatch('heap/heap_sort')
+        },
         quick_sort(){
           this.$store.dispatch('quick/quick_sort')
 
@@ -82,7 +85,7 @@ export default {
               $(compBartwo).css("background-color","red")
               $(heightBar).css("height",`${heightToChange}px` ) 
               },
-              1000*j)
+              10*j)
             
             j++
             setTimeout(()=>{
@@ -90,7 +93,7 @@ export default {
               $(compBarOne).css("background-color","gray")
               $(compBartwo).css("background-color","gray")
               },
-            1000*j)
+            10*j)
 
             j++
 
