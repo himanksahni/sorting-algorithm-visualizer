@@ -1,6 +1,6 @@
 <template>
     <div class="taskbar">
-          <!-- <font-awesome-icon  class="show-bars" v-b-toggle.sidebar-variant icon='bars' size="lg" /> -->
+          <font-awesome-icon  class="show-bars" v-b-toggle.sidebar-variant icon='bars' size="lg" />
           <b-button class="show-button" size="sm" v-b-toggle.sidebar-variant>Configurations</b-button>
           <b-sidebar text-variant="light" z-index=2 width="190px" id="sidebar-variant" bg-variant="dark" shadow>
             <div class="px-3 py-2">
@@ -163,9 +163,8 @@ export default {
       }
 
       .show-bars{
-        margin-left: 5px;
+        margin: 20px;
         display:inline-block;
-        height: 10px;
       }
 
       .show-button{
