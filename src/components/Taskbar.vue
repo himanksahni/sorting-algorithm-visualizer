@@ -48,6 +48,26 @@
             </nav>
             </div>
           </b-sidebar>
+
+          <div class="color-block">
+            <div class="completed"></div> <p class="color-tag">Sorted Position</p>
+          </div>
+          
+          <div class="color-block">
+            <div class="right-position"></div> <p class="color-tag">No Swapping</p>
+          </div>
+
+          <div class="color-block">
+            <div class="wrong-position"></div> <p class="color-tag">Needs Swapping</p>
+          </div>
+
+          <div class="color-block">
+            <div class="pivot"></div> <p class="color-tag">Pivot</p>
+          </div>
+
+          <div class="color-block">
+            <div class="next-swapping-position"></div> <p class="color-tag">Next Swapping Position</p>
+          </div>
     </div>
 </template>
 
@@ -151,9 +171,66 @@ export default {
   .show-bars{
     display: none
     }
+  
+  .color-block{
+    margin-left: 20px;
+  }
+  .completed{
+    margin-top:40%;
+    /* margin-left: 20px; */
+    width: 20px;
+    height: 20px;
+    background-color: #bae1ff;
+    display: inline-block;
+  }
+
+  .right-position{
+    /* margin-left: 20px; */
+    width: 20px;
+    height: 20px;
+    background-color: #baffc9;
+    display: inline-block;
+  }
+
+  .wrong-position{
+    /* margin-left: 20px; */
+    width: 20px;
+    height: 20px;
+    background-color: #ffb3ba;
+    display: inline-block;
+  }
+
+  .pivot{
+    /* margin-left: 20px; */
+    width: 20px;
+    height: 20px;
+    background-color: violet;
+    display: inline-block;
+  }
+  .next-swapping-position{
+    /* margin-left: 20px; */
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    display: inline-block;
+  }
+  .color-tag{
+    display: inline-block;
+    padding-left: 5px;
+    font-size: 0.8rem;
+  }
 
   @media only screen and (max-width: 600px) {
-
+      .color-block{
+        width:100%;
+        text-align: center;
+        margin: 0px
+      }
+      .color-tag{
+        text-align: center;
+        display: block;
+        font-size: 0.5rem;
+      }
       .mobile-input{
         display: inline !important;
       }
