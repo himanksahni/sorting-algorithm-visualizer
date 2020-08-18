@@ -22,23 +22,21 @@ export default {
             const newArr = [...store.state.array.array]
             const quickOrder = state.quickOrder
             quickSort(newArr,0,newArr.length -1, quickOrder)
-            console.log(quickOrder)
 
             let j=1
             let completedCount = 0
-            console.log(quickOrder.length)
+            const speed = store.state.array.speed
             for(let i =0; i< quickOrder.length; i++){
                     const pivotIndox = quickOrder[i][0]
                     const lastIndx = quickOrder[i].length -1
                     if(quickOrder[i][lastIndx]==="setting pivot"){
                         setTimeout(()=>{
                             completedCount++
-                            // console.log("setting pivot")
                             commit('changeBarColorQuick', {
                                 value:"pivot",
                                 barIndx:[pivotIndox]
                         })
-                        }, 10*j) 
+                        }, speed*j) 
                     j++}
                     else if(quickOrder[i][lastIndx]==="checking"){
                         const indxBarOne = quickOrder[i][0]
@@ -48,12 +46,11 @@ export default {
                         if(heightBarOne === -1){
                             setTimeout(()=>{
                                 completedCount++
-                                // console.log("in checking")
                                 commit('changeBarColorQuick', {
                                     value:"checking",
                                     barIndx:[indxBarOne,indxBarTwo]
                             })
-                            }, 10*j)
+                            }, speed*j)
                         j++
                         }
                         else if(heightBarOne!==-1){
@@ -65,7 +62,7 @@ export default {
                                         barIndx:[indxBarTwo]
     
                                     })
-                                }, 10*j)
+                                }, speed*j)
                                 j++
 
                                 setTimeout(()=>{
@@ -80,7 +77,7 @@ export default {
                                         barIndx:[indxBarOne,indxBarTwo]
     
                                     })
-                                }, 10*j)
+                                }, speed*j)
                                 j++
                             }
 
@@ -92,7 +89,7 @@ export default {
                                         barIndx:[indxBarOne,indxBarTwo]
     
                                     })
-                                }, 10*j)
+                                }, speed*j)
                                 j++
                             }
 
@@ -105,8 +102,6 @@ export default {
                         const heightBarTwo = quickOrder[i][3]
                         setTimeout(()=>{
                             completedCount++
-                            // console.log('partition-done')
-                            console.log(completedCount)
                             store.commit('array/changeValueAfterSortStep',{
                                 indxBarOne,
                                 indxBarTwo,
@@ -125,7 +120,7 @@ export default {
                                     barInx:[]
                             })
                             }
-                        }, 10*j) 
+                        }, speed*j) 
                     j++}      
             }
         },
@@ -162,7 +157,6 @@ export default {
                 state.quickGreenChanged = [barIndx[1]]
             }
             else if(value==='partition-done'){
-                // console.log("in pd mutation")
                 state.quickVoilet = false
                 state.quickGreen = false
                 state.quickIPosition= -1

@@ -28,11 +28,10 @@ export default {
         heap_sort({ commit, state, dispatch}){
             const arr = [...store.state.array.array]
             heapSort(arr, state.heapOrder)
-            console.log(arr, state.heapOrder)
 
             let j=1
             let completedCount = 0
-            console.log(state.heapOrder.length)
+            const speed = store.state.array.speed
             for(let i =0; i< state.heapOrder.length;i++){
                 const lastElIndx = state.heapOrder[i].length -1
                 let lastEl = state.heapOrder[i][lastElIndx]
@@ -46,12 +45,11 @@ export default {
                     const rc = state.heapOrder[i][5]
                     setTimeout(()=>{
                         completedCount++
-                        console.log(completedCount)
                         commit('changeBarColorHeap', {
                             value:'wrong',
                             barIndx:[indxBarOne, lc, rc]
                         })
-                    },10*j)
+                    },speed*j)
                     j++
 
                     setTimeout(()=>{
@@ -62,7 +60,7 @@ export default {
                                         heightBarTwo
                                     })
 
-                    },10*j)
+                    },speed*j)
                     j++
 
                     setTimeout(()=>{
@@ -74,7 +72,7 @@ export default {
                         if(completedCount == state.heapOrder.length){
                             dispatch('heap_sorted')
                         }
-                    },10*j)
+                    },speed*j)
                     j++
                     
                 }
@@ -82,12 +80,11 @@ export default {
                 else if(lastEl === 'swapping last and first'){
                     setTimeout(()=>{
                         completedCount++
-                        console.log(completedCount)
                         commit('changeBarColorHeap', {
                             value:'wrong',
                             barIndx:[indxBarOne, indxBarTwo]
                         })
-                    },10*j)
+                    },speed*j)
                     j++
 
                     setTimeout(()=>{
@@ -98,7 +95,7 @@ export default {
                                         heightBarTwo
                                     })
 
-                    },10*j)
+                    },speed*j)
                     j++
 
                     setTimeout(()=>{
@@ -111,7 +108,7 @@ export default {
                             dispatch('heap_sorted')
                         }
 
-                    },10*j)
+                    },speed*j)
                     j++
 
                 }
@@ -122,7 +119,6 @@ export default {
                     if(lc < state.heapOrder.length && rc < state.heapOrder.length){
                         setTimeout(()=>{
                             completedCount++
-                            console.log(completedCount)
                             commit('changeBarColorHeap', {
                                 value:'correct',
                                 barIndx:[indxBarOne, lc, rc]
@@ -130,13 +126,12 @@ export default {
                             if(completedCount == state.heapOrder.length){
                                 dispatch('heap_sorted')
                             }
-                        },10*j)
+                        },speed*j)
                         j++
                     }
                     else{
                         setTimeout(()=>{
                             completedCount++
-                            console.log(completedCount)
                             commit('changeBarColorHeap', {
                                 value:'correct',
                                 barIndx:[indxBarOne]
@@ -144,7 +139,7 @@ export default {
                             if(completedCount == state.heapOrder.length){
                                 dispatch('heap_sorted')
                             }
-                        },10*j)
+                        },speed*j)
                         j++
                     }
                 }

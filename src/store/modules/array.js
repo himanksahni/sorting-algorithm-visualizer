@@ -9,7 +9,8 @@ export default {
         sliderValue:1,
         mergeOrder:[[1,2]],
         showValue: true,
-        sorted:false
+        sorted:false,
+        speed: 500
 
     },
 
@@ -37,6 +38,11 @@ export default {
     },
 
     mutations: {
+        changeSpeed(state, {speed}){
+            const currentSpeed = state.speed
+            state.speed = 500/parseInt(speed)
+            console.log(currentSpeed, parseInt(speed))
+        },
         arraySorted(state){
             state.sorted = true
         },
@@ -50,7 +56,7 @@ export default {
         changeArray (state, {sliderValue}){
             const value = parseInt(sliderValue)
             state.array = []
-            for(let i=1; i< value +1; i++ ){
+            for(let i=1; i< value + 1; i++ ){
                 state.array.push(Math.floor(Math.random() * 200) + 1 )
             }
             state.array.length>110 && state.array.length<=200 ? state.width=2:

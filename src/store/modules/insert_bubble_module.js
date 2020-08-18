@@ -32,6 +32,7 @@ export default {
             let i = 1
             let j = 1
             let completedCount = 1
+            const speed = store.state.array.speed
             for(i; i < sortOrder.length; i++){
                 let heightBarOne = -1
                 let heightBarTwo = -1
@@ -47,7 +48,7 @@ export default {
                                 value:"comparing",
                                 barIndx:[indxBarOne, indxBarTwo]
                         })
-                    },10*j)
+                    },speed*j)
 
                 j++}
                 setTimeout(()=>{
@@ -64,7 +65,7 @@ export default {
                         barIndx:[indxBarOne, indxBarTwo]
                         })
                   },
-                10*j)
+                speed*j)
 
                 j++
                 setTimeout(()=>{
@@ -73,7 +74,6 @@ export default {
                         value:"sorting",
                         barInx:[]
                     })
-                    console.log(completedCount, sortOrder.length)
                     if(completedCount===sortOrder.length){
                         commit('changeBarColor', {
                             value:"arraySorted",
@@ -81,7 +81,7 @@ export default {
                     })
                     }
                   },
-                10*j)
+                speed*j)
                 j++
 
             }
