@@ -8,6 +8,8 @@
                   quickRed && quickRedChanged.includes(elId)? 'color-red':
                   heapRed && heapRedChanged.includes(elId)? 'color-red':
                   heapGreen && heapGreenChanged.includes(elId)? 'color-green':
+                  mergeRed && mergeRedChanged.includes(elId)? 'color-red':
+                  mergeGreen && mergeGreenChanged.includes(elId)? 'color-green':
                   seperator.includes(elId)?'completed':
                   'color-gray' ]"
         class="bars" :style="heightCss" >
@@ -33,6 +35,7 @@ export default {
                             'quickRedChanged','seperator']),
 
         ...mapState('heap',['heapRed', 'heapRedChanged', 'heapGreen', 'heapGreenChanged']),
+        ...mapState('merge',['mergeRed', 'mergeRedChanged', 'mergeGreen', 'mergeGreenChanged']),
         heightCss(){
             let h = (this.value*3) + 10
             h = `${h}px`
@@ -69,7 +72,7 @@ export default {
         background-color: #bae1ff;
     }
     .color-voilet{
-        background-color: violet;
+        background-color: #ba77b7;
     }
 
     .color-dark-green{

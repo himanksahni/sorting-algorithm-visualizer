@@ -143,18 +143,6 @@ export default {
                         j++
                     }
                 }
-                // if(completedCount == state.heapOrder.length){
-                    
-                //     setTimeout(()=>{
-                //         store.commit('array/arraySorted')
-                //         commit('changeBarColorHeap', {
-                //             value:'completed',
-                //             barIndx: []
-                //         })
-                //     },10*j)
-                //     // console.log("equal")
-                // }
-
             }
 
 

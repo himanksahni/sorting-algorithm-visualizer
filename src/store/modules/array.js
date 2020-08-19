@@ -38,10 +38,12 @@ export default {
     },
 
     mutations: {
+        merge_sort_helper(state, {newArr}){
+            state.array = newArr
+    
+        },
         changeSpeed(state, {speed}){
-            const currentSpeed = state.speed
             state.speed = 500/parseInt(speed)
-            console.log(currentSpeed, parseInt(speed))
         },
         arraySorted(state){
             state.sorted = true

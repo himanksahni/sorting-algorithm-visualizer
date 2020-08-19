@@ -11,7 +11,7 @@
                 </ul>
                 <p id="sel" class="nav-label"> Select Algorithm</p>
                 <ul>
-                  <li><a class="nav-link" v-b-toggle.sidebar-variant @click="merge_sort" href="#">Merge Sort</a></li>
+                  <li><a class="nav-link" v-b-toggle.sidebar-variant @click="mergesort" href="#">Merge Sort</a></li>
                   <li><a class="nav-link" v-b-toggle.sidebar-variant @click="heap_sort" href="#">Heap Sort</a></li>
                   <li><a class="nav-link" v-b-toggle.sidebar-variant @click="bubble_sort" href="#">Bubble Sort</a></li>
                   <li><a class="nav-link" v-b-toggle.sidebar-variant @click="insertion_sort" href="#">Insertion Sort</a></li>
@@ -93,8 +93,10 @@ export default {
 
         },
         insertion_sort(){
-          console.log(this.$store)
           this.$store.dispatch('insertBubble/insertion_and_bubble_sort',"insertion")
+        },
+        mergesort(){
+          this.$store.dispatch('merge/merge_sort')
         },
         merge_sort(){
           this.$store.dispatch('array/merge_sort')
@@ -204,7 +206,7 @@ export default {
     /* margin-left: 20px; */
     width: 20px;
     height: 20px;
-    background-color: violet;
+    background-color: #ba77b7;
     display: inline-block;
   }
   .next-swapping-position{

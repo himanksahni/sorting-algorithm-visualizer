@@ -2,7 +2,6 @@ function mergeSort(arr, mergeOrder){
     const subsituteArr = [...arr]
     const valueIndexArray=[]
     arr.forEach((el, i) => { valueIndexArray.push([i,el])});
-    console.log(valueIndexArray)
     mergeRecur(0, arr.length -1,  arr, subsituteArr, mergeOrder)
 }
 
@@ -17,9 +16,6 @@ function mergeRecur(start, end, array, subsituteArr, mergeOrder) {
 }
 
 function merge(start,mid, end, arr, subsituteArr, mergeOrder){
-    // console.log("start= ",start, "end= ", end, "mid= ", mid)
-    // console.log(subsituteArr.slice(start,end+1))
-    // console.log(arr)
     let i = start
     let j = mid+1
     let k = start
@@ -45,7 +41,6 @@ function merge(start,mid, end, arr, subsituteArr, mergeOrder){
         mergeOrder.push([j,j,k,subsituteArr[j]])
         arr[k++] = subsituteArr[j++]
     }
-    // console.log(arr, "end")
 }   
 
 
