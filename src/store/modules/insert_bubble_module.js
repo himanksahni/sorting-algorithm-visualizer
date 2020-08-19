@@ -29,6 +29,15 @@ export default {
                 bubbleSort(newArr, bubbleOrder)
                 sortOrder = bubbleOrder
             }
+
+
+            if(newArr.length===1){
+                commit('changeBarColor', {
+                    value:"arraySorted",
+                    barInx:[]
+            })
+            }
+            
             let i = 1
             let j = 1
             let completedCount = 1
@@ -107,8 +116,6 @@ export default {
             else if(value==="arraySorted"){
                 store.commit('array/arraySorted')
                 state.colorChanged = barIndx
-
-                ///////////////////////////
                 state.insertionOrder=[[1,2]] 
                 state.bubbleOrder=[[1,2]]
 

@@ -21,6 +21,15 @@ export default {
         merge_sort({commit,state}){
             const arr = [...store.state.array.array]
             const mergeOrder = state.mergeOrder
+            
+            if(arr.length===1){
+                store.commit('array/arraySorted')
+                commit('changeBarColorMerge', {
+                    value:"arraySorted",
+                    barInx:[]
+            })
+            }
+
             merge_sort(arr, mergeOrder)
 
             let j=1

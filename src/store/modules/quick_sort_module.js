@@ -21,6 +21,15 @@ export default {
         quick_sort({commit, state}){
             const newArr = [...store.state.array.array]
             const quickOrder = state.quickOrder
+            
+            if(newArr.length===1){
+                store.commit('array/arraySorted')
+                commit('changeBarColorQuick', {
+                    value:"arraySorted",
+                    barInx:[]
+            })
+            }
+
             quickSort(newArr,0,newArr.length -1, quickOrder)
 
             let j=1

@@ -19,14 +19,17 @@ export default {
     actions:{
         heap_sorted({commit}){
             store.commit('array/arraySorted')
-                        commit('changeBarColorHeap', {
-                            value:'completed',
-                            barIndx: []
-                        })
+            commit('changeBarColorHeap', {
+                value:'completed',
+                barIndx: []
+                })
 
         },
         heap_sort({ commit, state, dispatch}){
             const arr = [...store.state.array.array]
+            if(arr.length===1){
+                dispatch('heap_sorted')
+            }
             heapSort(arr, state.heapOrder)
 
             let j=1
