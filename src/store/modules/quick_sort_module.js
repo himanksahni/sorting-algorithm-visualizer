@@ -24,6 +24,7 @@ export default {
             
             if(newArr.length===1){
                 store.commit('array/arraySorted')
+                store.commit('array/switchDisabled')
                 commit('changeBarColorQuick', {
                     value:"arraySorted",
                     barInx:[]
@@ -124,6 +125,7 @@ export default {
                             })
                             if(completedCount===quickOrder.length){
                                 store.commit('array/arraySorted')
+                                store.commit('array/switchDisabled')
                                 commit('changeBarColorQuick', {
                                     value:"arraySorted",
                                     barInx:[]

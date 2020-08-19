@@ -7,30 +7,34 @@
               <nav class="nav flex-column">
                 <p class="nav-label"> Generate </p>
                 <ul>
-                  <li><a @click="changeArray({sliderValue})" class="nav-link active" href="#">New array</a></li>
+                  <li><a :class="[disabled ? 'disabled':'']" @click="changeArray({sliderValue})" class="nav-link active" href="#">New array</a></li>
                 </ul>
                 <p id="sel" class="nav-label"> Select Algorithm</p>
                 <ul>
-                  <li><a class="nav-link" v-b-toggle.sidebar-variant @click="mergesort" href="#">Merge Sort</a></li>
-                  <li><a class="nav-link" v-b-toggle.sidebar-variant @click="heap_sort" href="#">Heap Sort</a></li>
-                  <li><a class="nav-link" v-b-toggle.sidebar-variant @click="bubble_sort" href="#">Bubble Sort</a></li>
-                  <li><a class="nav-link" v-b-toggle.sidebar-variant @click="insertion_sort" href="#">Insertion Sort</a></li>
-                  <li><a class="nav-link" v-b-toggle.sidebar-variant @click="quick_sort" href="#">Quick Sort</a></li>
+                  <li><a :class="[disabled ? 'disabled':'']" class="nav-link" v-b-toggle.sidebar-variant @click="mergesort" href="#">Merge Sort</a></li>
+                  <li><a :class="[disabled ? 'disabled':'']" class="nav-link" v-b-toggle.sidebar-variant @click="heap_sort" href="#">Heap Sort</a></li>
+                  <li><a :class="[disabled ? 'disabled':'']" class="nav-link" v-b-toggle.sidebar-variant @click="bubble_sort" href="#">Bubble Sort</a></li>
+                  <li><a :class="[disabled ? 'disabled':'']" class="nav-link" v-b-toggle.sidebar-variant @click="insertion_sort" href="#">Insertion Sort</a></li>
+                  <li><a :class="[disabled ? 'disabled':'']" class="nav-link" v-b-toggle.sidebar-variant @click="quick_sort" href="#">Quick Sort</a></li>
                </ul>
                  <p class="nav-label">Change Size</p>
                 <ul>
                   <li class="desktop-input"><input type="range" 
                             min="1" 
                             max="120" 
-                            value="1" 
+                            value="1"
+                            :disabled="disabled" 
+                            :class="[disabled ? 'disabled':'']"
                             class="slider" 
                             id="myRange"
                             v-model="sliderValue"
                             @input="changeArray({sliderValue})"></li>
-                  <li class="mobile-input"><input type="range" 
+                  <li class="mobile-input"><input type="range"
                             min="1" 
                             max="65" 
-                            value="1" 
+                            value="1"
+                            :disabled="disabled" 
+                            :class="[disabled ? 'disabled':'']"
                             class="slider" 
                             v-model="sliderValue"
                             @input="changeArray({sliderValue})"></li>
@@ -40,7 +44,8 @@
                     <li><input type="range" 
                               min="1" 
                               max="100" 
-                              value="1" 
+                              value="1"
+                              :disabled="disabled"
                               class="slider" 
                               v-model="speed"
                               @input="changeSpeed({speed})"></li>
@@ -78,24 +83,29 @@ export default {
     name: 'Taskbar',
     computed:{
 
-        ...mapState('array',['array','mergeOrder'])
+        ...mapState('array',['array','mergeOrder','disabled'])
     },
     methods: {
         heap_sort(){
+          this.$store.commit('array/switchDisabled')
           this.$store.dispatch('heap/heap_sort')
         },
         quick_sort(){
+          this.$store.commit('array/switchDisabled')
           this.$store.dispatch('quick/quick_sort')
 
         },
         bubble_sort(){
+          this.$store.commit('array/switchDisabled')
           this.$store.dispatch('insertBubble/insertion_and_bubble_sort',"bubble")
 
         },
         insertion_sort(){
+          this.$store.commit('array/switchDisabled')
           this.$store.dispatch('insertBubble/insertion_and_bubble_sort',"insertion")
         },
         mergesort(){
+          this.$store.commit('array/switchDisabled')
           this.$store.dispatch('merge/merge_sort')
         },
         merge_sort(){
@@ -203,14 +213,12 @@ export default {
   }
 
   .pivot{
-    /* margin-left: 20px; */
     width: 20px;
     height: 20px;
     background-color: #ba77b7;
     display: inline-block;
   }
   .next-swapping-position{
-    /* margin-left: 20px; */
     width: 20px;
     height: 20px;
     background-color: green;
@@ -220,6 +228,10 @@ export default {
     display: inline-block;
     padding-left: 5px;
     font-size: 0.8rem;
+  }
+  .disable{
+    pointer-events: none;
+    cursor: not-allowed;
   }
 
   @media only screen and (max-width: 600px) {

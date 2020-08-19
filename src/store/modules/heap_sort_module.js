@@ -19,6 +19,7 @@ export default {
     actions:{
         heap_sorted({commit}){
             store.commit('array/arraySorted')
+            store.commit('array/switchDisabled')
             commit('changeBarColorHeap', {
                 value:'completed',
                 barIndx: []

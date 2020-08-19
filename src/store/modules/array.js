@@ -10,7 +10,8 @@ export default {
         mergeOrder:[[1,2]],
         showValue: true,
         sorted:false,
-        speed: 500
+        speed: 500,
+        disabled:false
 
     },
 
@@ -38,6 +39,9 @@ export default {
     },
 
     mutations: {
+        switchDisabled(state){
+            state.disabled = !state.disabled
+        },
         merge_sort_helper(state, {newArr}){
             state.array = newArr
     

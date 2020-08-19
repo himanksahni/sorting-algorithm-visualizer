@@ -21,9 +21,10 @@ export default {
         merge_sort({commit,state}){
             const arr = [...store.state.array.array]
             const mergeOrder = state.mergeOrder
-            
+
             if(arr.length===1){
                 store.commit('array/arraySorted')
+                store.commit('array/switchDisabled')
                 commit('changeBarColorMerge', {
                     value:"arraySorted",
                     barInx:[]
@@ -50,6 +51,7 @@ export default {
                         })
                         if(completedCount===mergeOrder.length){
                             store.commit('array/arraySorted')
+                            store.commit('array/switchDisabled')
                             commit('changeBarColorMerge', {
                                 value:"arraySorted",
                                 barInx:[]
@@ -81,6 +83,7 @@ export default {
 
                         if(completedCount===mergeOrder.length){
                             store.commit('array/arraySorted')
+                            store.commit('array/switchDisabled')
                             commit('changeBarColorMerge', {
                                 value:"arraySorted",
                                 barInx:[]

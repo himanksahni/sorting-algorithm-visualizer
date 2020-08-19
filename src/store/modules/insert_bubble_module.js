@@ -37,7 +37,7 @@ export default {
                     barInx:[]
             })
             }
-            
+
             let i = 1
             let j = 1
             let completedCount = 1
@@ -115,6 +115,7 @@ export default {
             }
             else if(value==="arraySorted"){
                 store.commit('array/arraySorted')
+                store.commit('array/switchDisabled')
                 state.colorChanged = barIndx
                 state.insertionOrder=[[1,2]] 
                 state.bubbleOrder=[[1,2]]
