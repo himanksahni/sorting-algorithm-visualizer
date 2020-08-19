@@ -7,15 +7,15 @@
               <nav class="nav flex-column">
                 <p class="nav-label"> Generate </p>
                 <ul>
-                  <li><a :class="[disabled ? 'disabled':'']" @click="changeArray({sliderValue})" class="nav-link active">New array</a></li>
+                  <li><a :class="[disabled ? 'disabled':'']" @click="changeArray({sliderValue})" class="nav-link active" href="#">New array</a></li>
                 </ul>
                 <p id="sel" class="nav-label"> Select Algorithm</p>
                 <ul>
-                  <li><a class="a-wrap" v-b-toggle.sidebar-variant><a class="nav-link" :class="[disabled ? 'disabled':'']" @click="mergesort">Merge Sort</a></a></li>
-                  <li><a class="a-wrap" v-b-toggle.sidebar-variant><a :class="[disabled ? 'disabled':'']" class="nav-link" @click="heap_sort">Heap Sort</a></a></li>
-                  <li><a class="a-wrap" v-b-toggle.sidebar-variant><a :class="[disabled ? 'disabled':'']" class="nav-link" @click="bubble_sort">Bubble Sort</a></a></li>
-                  <li><a class="a-wrap" v-b-toggle.sidebar-variant><a :class="[disabled ? 'disabled':'']" class="nav-link" @click="insertion_sort">Insertion Sort</a></a></li>
-                  <li><a class="a-wrap" v-b-toggle.sidebar-variant><a :class="[disabled ? 'disabled':'']" class="nav-link" @click="quick_sort">Quick Sort</a></a></li>
+                  <li><a :class="[disabled ? 'disabled':'']" class="nav-link" v-b-toggle.sidebar-variant @click="mergesort" href="#">Merge Sort</a></li>
+                  <li><a :class="[disabled ? 'disabled':'']" class="nav-link" v-b-toggle.sidebar-variant @click="heap_sort" href="#">Heap Sort</a></li>
+                  <li><a :class="[disabled ? 'disabled':'']" class="nav-link" v-b-toggle.sidebar-variant @click="bubble_sort" href="#">Bubble Sort</a></li>
+                  <li><a :class="[disabled ? 'disabled':'']" class="nav-link" v-b-toggle.sidebar-variant @click="insertion_sort" href="#">Insertion Sort</a></li>
+                  <li><a :class="[disabled ? 'disabled':'']" class="nav-link" v-b-toggle.sidebar-variant @click="quick_sort" href="#">Quick Sort</a></li>
                </ul>
                  <p class="nav-label">Change Size</p>
                 <ul>
@@ -23,7 +23,8 @@
                             min="1" 
                             max="120" 
                             value="1"
-                            :disabled="disabled"
+                            :disabled="disabled" 
+                            :class="[disabled ? 'disabled':'']"
                             class="slider" 
                             id="myRange"
                             v-model="sliderValue"
@@ -32,7 +33,8 @@
                             min="1" 
                             max="65" 
                             value="1"
-                            :disabled="disabled"
+                            :disabled="disabled" 
+                            :class="[disabled ? 'disabled':'']"
                             class="slider" 
                             v-model="sliderValue"
                             @input="changeArray({sliderValue})"></li>
@@ -80,7 +82,6 @@ import $ from 'jquery'
 export default {
     name: 'Taskbar',
     computed:{
-
         ...mapState('array',['array','mergeOrder','disabled'])
     },
     methods: {
@@ -91,12 +92,10 @@ export default {
         quick_sort(){
           this.$store.commit('array/switchDisabled')
           this.$store.dispatch('quick/quick_sort')
-
         },
         bubble_sort(){
           this.$store.commit('array/switchDisabled')
           this.$store.dispatch('insertBubble/insertion_and_bubble_sort',"bubble")
-
         },
         insertion_sort(){
           this.$store.commit('array/switchDisabled')
@@ -118,9 +117,7 @@ export default {
             const compBartwo = bars[mergeOrder[i][1]]
             const heightToChange = (mergeOrder[i][3] *3 ) + 10
             const heightBar = bars[mergeOrder[i][2]]
-
             setTimeout(()=>{
-
               $(compBarOne).css("background-color","red")
               $(compBartwo).css("background-color","red")
               $(heightBar).css("height",`${heightToChange}px` ) 
@@ -129,17 +126,12 @@ export default {
             
             j++
             setTimeout(()=>{
-
               $(compBarOne).css("background-color","gray")
               $(compBartwo).css("background-color","gray")
               },
             10*j)
-
             j++
-
-
           }
-
         },
         ...mapMutations('array',['changeArray','changeValue','changeSpeed']),
         ...mapMutations('insertBubble',['changeValue'])
@@ -161,27 +153,19 @@ export default {
   .taskbar{
     grid-column: 1/3;
   }
-
   a{
     text-decoration: none;
     color: white;
   }
-  .a-wrap{
-    text-decoration: none;
-    cursor:not-allowed
-  }
-
   .nav-label{
     color: grey
   }
-
   strong{
     color: white!important;
   }
   .mobile-input{
     display: none !important;
   }
-
   .show-bars{
     display: none
     }
@@ -197,7 +181,6 @@ export default {
     background-color: #bae1ff;
     display: inline-block;
   }
-
   .right-position{
     /* margin-left: 20px; */
     width: 20px;
@@ -205,7 +188,6 @@ export default {
     background-color: #baffc9;
     display: inline-block;
   }
-
   .wrong-position{
     /* margin-left: 20px; */
     width: 20px;
@@ -213,7 +195,6 @@ export default {
     background-color: #ffb3ba;
     display: inline-block;
   }
-
   .pivot{
     width: 20px;
     height: 20px;
@@ -235,7 +216,6 @@ export default {
     pointer-events: none;
     cursor: not-allowed;
   }
-
   @media only screen and (max-width: 600px) {
       .color-block{
         width:100%;
@@ -250,19 +230,15 @@ export default {
       .mobile-input{
         display: inline !important;
       }
-
       .desktop-input{
         display: none !important;
       }
-
       .show-bars{
         margin: 20px;
         display:inline-block;
       }
-
       .show-button{
         display: none;
       }
-
   }
 </style>
